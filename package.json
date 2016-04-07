@@ -1,0 +1,23 @@
+{
+  "name": "pibot",
+  "version": "1.0.0",
+  "description": "My pi3 bot!",
+  "main": "pibot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "raspberrypi"
+  ],
+  "author": "Srikanth Sombhatla",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.0.0-rc.2",
+    "botkit": "0.0.15",
+    "chuck-norris-api": "^1.0.8",
+    "request": "^2.70.0",
+    "say": "^0.9.0",
+    "string": "^3.3.1",
+    "underscore": "^1.8.3"
+  }
+}
