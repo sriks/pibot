@@ -18,6 +18,10 @@ var _stripAll = function(text) {
 }
 
 var _processSay = function(toSay, message, cb) {
+    toSay = S(toSay).unescapeHTML().s;
+    toSay = toSay.replace(/&quot;/g,'"');
+    toSay = S(toSay).stripPunctuation().s;
+    
     _console('toSay: '+toSay);
     
     if (_startsWith(toSay, 'joke')) {
@@ -25,13 +29,13 @@ var _processSay = function(toSay, message, cb) {
             if (err) {
                 cb(err);
             } else {
-                speaker.speak(res.joke, {}, cb);
+                speaker.speak(res.joke, {'speed': 0.82}, cb);
             }
         });
     } 
     
     else {
-        speaker.speak(toSay, {}, cb);
+        speaker.speak(toSay, {'speed': 0.9}, cb);
     }
 }
 
