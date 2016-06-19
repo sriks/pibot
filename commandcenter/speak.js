@@ -2,14 +2,16 @@
 
 var say = require('say');
 var async = require('async');
+var _ = require('underscore');
 
 var _speakTask = function(task, callback) {
     console.log('speaking:'+task.msg);
-    var speed = task.options.speed ? task.options.speed : 1.0;
-    var modulation = task.options.modulation ? task.options.modulation : undefined;
+    var speed = _.has(task.options, 'speed') ? task.options.speed : 1.0;
+    var modulation = _.has(task.options, 'modulation') ? task.options.modulation : undefined;
     say.speak(task.msg, modulation, speed, function(err) {
         if (err) { return console.error(err); }
-        callback(null);
+        if (callback)
+            callback(null);
     });
 }
 
@@ -18,7 +20,8 @@ var speak = function(msg, options, cb) {
     if (arguments.callee.speakingQueue === undefined) {
         arguments.callee.speakingQueue = async.queue(function (task, callback) {
             _speakTask(task, callback);
-            cb(null, {'reply': 'spoken: '+task.msg});
+            if (cb)
+                cb(null, {'reply': 'spoken: '+task.msg});
         }, 1);
         arguments.callee.speakingQueue.drain = function() {}
     } 
