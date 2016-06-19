@@ -5,6 +5,7 @@ var _ = require('underscore');
 var Botkit = require('botkit');
 var controller = Botkit.slackbot();
 var cc = require('./commandcenter/commandcenter.js');
+var private = require('./private_pibot_config.json');
 
 var _processCommand = function(message, cb) {
     cc.process(message, cb);
@@ -26,8 +27,7 @@ var start = function(isTest) {
     }
     
     var bot = controller.spawn({
-        token: 'xoxb-32744129586-jR6mza7IapQLvGVeCTNbUcCH'
-        //token: 'xoxb-32744129586-0eutZ0QiPQK3FV9q9g8aYb3y'
+        token: private.slackbot_token
     })
 
     bot.startRTM(function(err, bot, payload) {
