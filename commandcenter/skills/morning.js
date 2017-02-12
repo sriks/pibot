@@ -1,4 +1,4 @@
-var Infra = require('./infra');
+var Infra = require('../infra');
 var events = Infra.events;
 var speaker = Infra.speaker;
 var MINUTE = 1000 * 60;
@@ -18,6 +18,7 @@ var onTimeout =  function(context) {
   }
 };
 
+// Registers when loaded for the first time
 var register = function() {
   events.on("schedule.workcountdown", function () {
       console.log("event has occured schedule.workcountdown");

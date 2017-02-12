@@ -1,12 +1,12 @@
 // Command Center
 
 var S = require('string');
-var workers = require('./workers.js');
 var utils = require('./utils.js');
-var clown = workers.clown;
-var weather = workers.weather;
-var music = workers.music;
-var morning = workers.morning;
+var Skills = require('./skills');
+var clown = Skills.clown;
+var weather = Skills.weather;
+var music = Skills.music;
+var morning = Skills.morning;
 
 var Infra = require('./infra');
 var speaker = Infra.speaker;
