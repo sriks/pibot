@@ -1,0 +1,6 @@
+[
+  {
+    "event": "schedule.workcountdown",
+    "cron": "35 7 * * 1-5"
+  }
+]
