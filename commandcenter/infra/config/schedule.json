@@ -2,5 +2,10 @@
   {
     "event": "schedule.workcountdown",
     "cron": "35 7 * * 1-5"
+  },
+  {
+    "active": false,
+    "event": "schedule.workcountdown",
+    "cron": "*/1 * * * *"
   }
 ]

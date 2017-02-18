@@ -4,6 +4,7 @@ var IS_TEST = false;
 var _ = require('underscore');
 var Botkit = require('botkit');
 var controller = Botkit.slackbot();
+var winston = require('winston');
 var cc = require('./commandcenter/commandcenter.js');
 var private = require('./private_pibot_config.json');
 
@@ -21,6 +22,9 @@ var _test = function() {
 }
 
 var start = function(isTest) {
+    prepareCommons();
+    winston.info('*** PIBOT STARTED ***');
+
     if (isTest) {
         _test();
         return;
@@ -32,8 +36,8 @@ var start = function(isTest) {
 
     bot.startRTM(function(err, bot, payload) {
       if (err) {
-        console.log(err);
-        throw new Error('Could not connect to Slack');
+        winston.error(err);
+        // Let it live.
       } else {
           console.log('connected to slack');
           cc.prepareAutoJobs();
@@ -51,6 +55,18 @@ var start = function(isTest) {
             }
         });
     });
+}
+
+var prepareCommons = function() {
+  // Configure winston logger
+  winston.remove(winston.transports.Console);
+  winston.add(winston.transports.Console, {
+    timestamp: true,
+    level: 'silly',
+    colorize: true,
+    prettyPrint: true
+  });
+  winston.info('Winston Configured');
 }
 
 start(IS_TEST);
