@@ -19,7 +19,7 @@ var _scheduleJob = function(jobConfig) {
     var job = schedule.scheduleJob(jobConfig.cron, function() {
       console.log('triggering job ' + jobConfig.event + ' ' + new Date());
       winston.info('triggering job ' + jobConfig.event);
-      events.emit(jobConfig.event);
+      events.emit(jobConfig.event, jobConfig);
     });
   } else {
     winston.info('ignorning job '+JSON.stringify(jobConfig));

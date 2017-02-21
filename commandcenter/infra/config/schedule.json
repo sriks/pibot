@@ -7,5 +7,10 @@
     "active": false,
     "event": "schedule.workcountdown",
     "cron": "*/1 * * * *"
+  },
+  {
+      "event": "reminder.medicine.multivitamin",
+      "reminder": "Divya, its time for your multi vitamin tablets.",
+      "cron": "00 9 * * *"
   }
 ]
