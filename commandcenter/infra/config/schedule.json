@@ -9,8 +9,13 @@
     "cron": "*/1 * * * *"
   },
   {
+      "event": "reminder.medicine.tyroid",
+      "reminder": "Divya, its time for your tyroid tablet.",
+      "cron": "20 7 * * *"
+  },
+  {
       "event": "reminder.medicine.multivitamin",
-      "reminder": "Divya, its time for your multi vitamin tablets.",
-      "cron": "00 9 * * *"
+      "reminder": "Divya, its time for your multi vitamin tablet.",
+      "cron": "15 9 * * *"
   }
 ]
