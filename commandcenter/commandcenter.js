@@ -82,7 +82,9 @@ var process = function(message, cb) {
 
     // joke
     if (S(command).startsWith('joke')) {
-        clown.randomJoke({}, cb);
+        console.log('Ignoring joke');
+        // Need to make this working, so disabling for now. 
+        //clown.randomJoke({}, cb);
     }
 
     // weather updates
