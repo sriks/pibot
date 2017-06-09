@@ -8,14 +8,17 @@ var events = require('./index').events;
 var allJobs = {};
 
 var startAll = function(cb) {
-  var scheduleJSONPath = './config/schedule.json';
+  var appRoot = require('app-root-path');
+  var scheduleJSONPath = appRoot + '/commandcenter/infra/config/schedule.json';
   require('fs').readFile(scheduleJSONPath, 'utf8', function (err, data) {
     if (err) {
-      winston.warn("Scehduled jobs not found at "+scheduleJSONPath);
+      console.log(err);
+      winston.warn("Unable to read scehduled jobs at "+scheduleJSONPath);
       return;
+    } else {
+      winston.info("Reading scheduled jobs from "+scheduleJSONPath);
     }
     allJobs = JSON.parse(data);
-
     if (allJobs) {
       _.each(allJobs, function(jobConfig) {
         _scheduleJob(jobConfig);
