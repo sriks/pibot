@@ -5,11 +5,22 @@ var schedule = require('node-schedule');
 var fs = require('fs');
 var winston = require('winston');
 var events = require('./index').events;
-var allJobs = require('./config/schedule.json');
+var allJobs = {};
 
 var startAll = function(cb) {
-  _.each(allJobs, function(jobConfig) {
-    _scheduleJob(jobConfig);
+  var scheduleJSONPath = './config/schedule.json';
+  require('fs').readFile(scheduleJSONPath, 'utf8', function (err, data) {
+    if (err) {
+      winston.warn("Scehduled jobs not found at "+scheduleJSONPath);
+      return;
+    }
+    allJobs = JSON.parse(data);
+
+    if (allJobs) {
+      _.each(allJobs, function(jobConfig) {
+        _scheduleJob(jobConfig);
+      });
+    }
   });
 };
 
