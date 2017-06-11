@@ -23,11 +23,14 @@ var onTimeout =  function(context) {
 
 // Registers when loaded for the first time
 var register = function() {
-  events.on("schedule.workcountdown", function () {
-      winston.info("event has occured schedule.workcountdown");
-      T = (delayInMs * REPEAT);
-      onTimeout('first shot');
-      timeoutObj = setInterval(onTimeout, delayInMs, 'timer triggered');
+  events.on("com.pibot.scheduler.event", function (userInfo) {
+      var eventId = userInfo["id"];
+      if (eventId === "schedule.workcountdown") {
+        winston.info("event has occured schedule.workcountdown");
+        T = (delayInMs * REPEAT);
+        onTimeout('First shot');
+        timeoutObj = setInterval(onTimeout, delayInMs, 'timer triggered');
+      }
   });
   winston.info("Registered to event schedule.workcountdown");
-}();
+} ();

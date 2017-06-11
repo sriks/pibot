@@ -1,0 +1,15 @@
+[
+  {
+      "active": false,
+      "id": "switch.light.on",
+      "cron": "25 7 * * 1-5",
+      "lightid": "bedroom"
+  },
+
+  {
+      "active": true,
+      "id": "pibot.speak.test",
+      "cron": "*/10 * * * * *",
+      "speak": "Hello world!"
+  }
+]

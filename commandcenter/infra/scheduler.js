@@ -1,4 +1,8 @@
-// Grand Job Scheduler. Schedules and emits events as configured in schedule.json
+/*
+Grand Job Scheduler. Schedules and emits events as configured in schedule.json
+Listners should listen on event named "com.pibot.scheduler.event" and check the payload
+for id.
+*/
 
 var _ = require('underscore');
 var schedule = require('node-schedule');
@@ -31,9 +35,10 @@ var _scheduleJob = function(jobConfig) {
   if (!_.has(jobConfig, 'active') || jobConfig.active) {
     winston.info('scheduling job '+ JSON.stringify(jobConfig));
     var job = schedule.scheduleJob(jobConfig.cron, function() {
-      console.log('triggering job ' + jobConfig.event + ' ' + new Date());
-      winston.info('triggering job ' + jobConfig.event);
-      events.emit(jobConfig.event, jobConfig);
+      if (_.has(jobConfig, "id")) {
+        winston.info('triggering job ' + jobConfig.id);
+        events.emit("com.pibot.scheduler.event", jobConfig);
+      }
     });
   } else {
     winston.info('ignorning job '+JSON.stringify(jobConfig));
