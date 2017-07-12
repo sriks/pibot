@@ -3,16 +3,18 @@
 var say = require('say');
 var async = require('async');
 var _ = require('underscore');
+var polly = require('./aws-polly.js');
 
 var _speakTask = function(task, callback) {
     console.log('speaking:'+task.msg);
-    var speed = _.has(task.options, 'speed') ? task.options.speed : 1.0;
-    var modulation = _.has(task.options, 'modulation') ? task.options.modulation : undefined;
-    say.speak(task.msg, modulation, speed, function(err) {
-        if (err) { return console.error(err); }
-        if (callback)
-            callback(null);
-    });
+    polly.speak(task.msg, callback);
+    // var speed = _.has(task.options, 'speed') ? task.options.speed : 1.0;
+    // var modulation = _.has(task.options, 'modulation') ? task.options.modulation : undefined;
+    // say.speak(task.msg, modulation, speed, function(err) {
+    //     if (err) { return console.error(err); }
+    //     if (callback)
+    //         callback(null);
+    // });
 }
 
 var speak = function(msg, options, cb) {

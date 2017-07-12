@@ -14,8 +14,10 @@
   "dependencies": {
     "app-root-path": "^2.0.1",
     "async": "^2.0.0-rc.2",
+    "aws-sdk": "^2.80.0",
     "botkit": "0.0.15",
     "chuck-norris-api": "^1.0.8",
+    "md5": "^2.2.1",
     "node-schedule": "^1.1.0",
     "npm-openweathermap": "0.0.1",
     "omxctrl": "^0.1.2",
