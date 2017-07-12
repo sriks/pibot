@@ -1,4 +1,4 @@
-commandcenter/infra/config/*.json
+commandcenter/infra/config/aws.json
 
 *.DS_Store
 gs
