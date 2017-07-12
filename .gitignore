@@ -1,3 +1,4 @@
+commandcenter/infra/config/*.json
 
 *.DS_Store
 gs
