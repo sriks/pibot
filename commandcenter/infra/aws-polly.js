@@ -5,6 +5,7 @@ var fs = require('fs');
 var path = require('path');
 var md5 = require('md5');
 var omx = require('omxctrl');
+var cmd = require('node-cmd');
 const FILE_FORMAT	=	"mp3";
 
 var prepareAWS = function() {
@@ -41,7 +42,7 @@ var speak = function(msg, cb) {
                 if (err) {
                     return console.log(err)
                 }
-                omx.play(outFile);
+                cmd.run('omxplayer -o local '+outFile);
                 console.log("The file was saved "+outFile)
                 cb(null, null);
             })
