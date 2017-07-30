@@ -6,7 +6,7 @@ var path = require('path');
 var md5 = require('md5');
 var omx = require('omxctrl');
 var cmd = require('node-cmd');
-const FILE_FORMAT	=	"mp3";
+const FILE_FORMAT	=	"ogg_vorbis";
 
 var prepareAWS = function() {
 	var awsPath = appRoot + '/commandcenter/infra/config/aws.json';
@@ -21,7 +21,8 @@ var filePathForMessage = function(msg) {
 }
 
 var outputToSpeaker = function(audioFilePath, cb) {
-	omx.play(songToPlay, args);
+	var args = ['--vol 900']
+	omx.play(audioFilePath, args);
 	omx.on('playing', function(filename) {
 			console.log('playing: ', filename);
 	});
@@ -56,8 +57,6 @@ var speak = function(msg, cb) {
                 }
 								console.log("The file was saved "+outFile)
 								outputToSpeaker(outFile, cb);
-                // cmd.run('omxplayer -o local '+outFile);
-                // cb(null, null);
             })
         }
 	 }
