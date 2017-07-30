@@ -10,8 +10,13 @@ const FILE_FORMAT	=	"ogg_vorbis";
 
 var prepareAWS = function() {
 	var awsPath = appRoot + '/commandcenter/infra/config/aws.json';
-	AWS.config.loadFromPath(awsPath);
-}();
+	if (fs.existsSync(awsPath)) {
+			AWS.config.loadFromPath(awsPath);
+	} else {
+			console.error("Aborting: *** Configuration not found at "+awsPath);
+			process.exit(1);
+	}
+} ();
 
 /*Returns file name + extension for msg. Applying the same msg will return the same file name*/
 var filePathForMessage = function(msg) {
@@ -34,7 +39,6 @@ var outputToSpeaker = function(audioFilePath, cb) {
 
 var speak = function(msg, cb) {
 	const outFile = filePathForMessage(msg);
-
 	// http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly.html
 	var polly = new AWS.Polly();
 	var params = {
