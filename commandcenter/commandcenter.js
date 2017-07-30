@@ -24,12 +24,12 @@ var _stripAll = function(text) {
 }
 
 var _processSay = function(toSay, message, cb) {
-    toSay = S(toSay).unescapeHTML().s;
-    toSay = toSay.replace(/&quot;/g,'"');
-    toSay = S(toSay).stripPunctuation().s;
+    // Not stripping message
+    // toSay = S(toSay).unescapeHTML().s;
+    // toSay = toSay.replace(/&quot;/g,'"');
+    // toSay = S(toSay).stripPunctuation().s;
 
     _console('toSay: '+toSay);
-
     if (_startsWith(toSay, 'joke')) {
         process({'text': toSay}, function(err, res) {
             if (err) {
@@ -83,7 +83,7 @@ var process = function(message, cb) {
     // joke
     if (S(command).startsWith('joke')) {
         console.log('Ignoring joke');
-        // Need to make this working, so disabling for now. 
+        // Need to make this working, so disabling for now.
         //clown.randomJoke({}, cb);
     }
 
