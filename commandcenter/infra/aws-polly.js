@@ -20,31 +20,44 @@ var filePathForMessage = function(msg) {
 	return path.join(dir, fileName);
 }
 
+var outputToSpeaker = function(audioFilePath, cb) {
+	omx.play(songToPlay, args);
+	omx.on('playing', function(filename) {
+			console.log('playing: ', filename);
+	});
+	omx.on('ended', function() {
+			console.log('playback has ended');
+			cb(null, null);
+	});
+}
+
 var speak = function(msg, cb) {
 	const outFile = filePathForMessage(msg);
 
 	// http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly.html
 	var polly = new AWS.Polly();
 	var params = {
-	  OutputFormat: FILE_FORMAT, 
-	  Text: msg, 
-	  TextType: "text", 
+	  OutputFormat: FILE_FORMAT,
+	  Text: msg,
+	  TextType: "text",
 	  VoiceId: "Amy"
 	 };
 
 	 polly.synthesizeSpeech(params, function(err, data) {
-	  if (err) { 
+	  if (err) {
 	  	console.log(err, err.stack); // an error occurred
 	  	cb(err);
-	 } else {  
+	 } else {
 		if (data.AudioStream instanceof Buffer) {
             fs.writeFile(outFile, data.AudioStream, function(err) {
                 if (err) {
-                    return console.log(err)
+                    console.log(err)
+										cb(err);
                 }
-                cmd.run('omxplayer -o local '+outFile);
-                console.log("The file was saved "+outFile)
-                cb(null, null);
+								console.log("The file was saved "+outFile)
+								outputToSpeaker(outFile, cb);
+                // cmd.run('omxplayer -o local '+outFile);
+                // cb(null, null);
             })
         }
 	 }
@@ -54,4 +67,3 @@ var speak = function(msg, cb) {
 module.exports = {
 	'speak': speak
 };
-
