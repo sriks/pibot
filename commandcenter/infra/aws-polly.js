@@ -6,8 +6,8 @@ var path = require('path');
 var md5 = require('md5');
 var omx = require('omxctrl');
 var cmd = require('node-cmd');
-const PollySsmlBuilder = require("polly-ssml-builder");
-const FILE_FORMAT =	"mp3";
+var awsSSMLBuilder = require('ssml-builder/amazon_speech')
+var FILE_FORMAT =	"mp3";
 
 var prepareAWS = function() {
 	var awsPath = appRoot + '/commandcenter/infra/config/aws.json';
@@ -40,8 +40,11 @@ var outputToSpeaker = function(audioFilePath, cb) {
 
 var requestParamsForMessage = function(msg) {
 	// http://docs.aws.amazon.com/polly/latest/dg/supported-ssml.html
-	var builder = new PollySsmlBuilder();
-	var ssml = builder.speak(msg).addBreak("3s").build()
+	var builder = new awsSSMLBuilder();
+	builder.say(msg)
+	builder.pause('3s')
+	var ssml = builder.ssml()
+	console.log(ssml)
 
 	// http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly.html
 	var params = {
