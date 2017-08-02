@@ -22,6 +22,7 @@
     "node-schedule": "^1.1.0",
     "npm-openweathermap": "0.0.1",
     "omxctrl": "^0.1.2",
+    "polly-ssml-builder": "^1.0.1",
     "request": "^2.70.0",
     "say": "^0.9.0",
     "string": "^3.3.1",
