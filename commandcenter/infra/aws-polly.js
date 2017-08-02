@@ -40,8 +40,8 @@ var outputToSpeaker = function(audioFilePath, cb) {
 
 var requestParamsForMessage = function(msg) {
 	// http://docs.aws.amazon.com/polly/latest/dg/supported-ssml.html
-	let builder = new PollySsmlBuilder();
-	let ssml = builder.speak(msg).addBreak("3s").build()
+	var builder = new PollySsmlBuilder();
+	var ssml = builder.speak(msg).addBreak("3s").build()
 
 	// http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly.html
 	var params = {
