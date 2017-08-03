@@ -15,7 +15,8 @@ var prepareAWS = function() {
 			AWS.config.loadFromPath(awsPath);
 	} else {
 			console.error("Aborting: *** Configuration not found at "+awsPath);
-			process.exit(1);
+			process.exitCode = 20
+			process.exit();
 	}
 } ();
 

@@ -55,6 +55,14 @@ var start = function(isTest) {
             }
         });
     });
+
+    // bot gets disconnected due to inactivity (?), so exit process which should kick back again.
+    controller.on('rtm_close', function() {
+        winston.info("*** rtm_close, restarting process");
+        process.exitCode = 2;
+        process.exit();
+        // we use process manager, which restarts the bot
+    })
 }
 
 var prepareCommons = function() {
