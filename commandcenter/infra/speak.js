@@ -9,6 +9,7 @@ var speakingQueue;
 var _speak = function(message, cb) {
     console.log('speaking:'+message);
     polly.speak(message, function(err) {
+      if (!cb) { return }
       if (!err) {
         cb(null, {'reply': 'spoken: '+message});
       } else {
