@@ -35,13 +35,13 @@ var _processSay = function(toSay, message, cb) {
             if (err) {
                 cb(err);
             } else {
-                speaker.speak(res.joke, {'speed': 0.82}, cb);
+                speaker.speak(res.joke, cb);
             }
         });
     }
 
     else {
-        speaker.speak(toSay, {'speed': 0.9}, cb);
+        speaker.speak(toSay, cb);
     }
 }
 

@@ -27,7 +27,7 @@ var _speak = function(message, cb) {
     // });
 }
 
-var speak = function(msg, options, cb) {
+var speak = function(msg, cb) {
     // TODO: use queue
     _speak(msg, cb);
 }
