@@ -1,6 +1,7 @@
-
+// Module to speak using aws polly.
+//
+var winston = require('winston');
 var AWS = require('aws-sdk');
-var appRoot = require('app-root-path');
 var fs = require('fs');
 var path = require('path');
 var md5 = require('md5');
@@ -10,13 +11,14 @@ var awsSSMLBuilder = require('ssml-builder/amazon_speech')
 var FILE_FORMAT =	"mp3";
 
 var prepareAWS = function() {
-	var awsPath = appRoot + '/commandcenter/infra/config/aws.json';
+	var awsPath = path.join(process.env.CONFIG_PATH, 'aws.json')
+	winston.info("Loading aws from " + awsPath);
 	if (fs.existsSync(awsPath)) {
-			AWS.config.loadFromPath(awsPath);
+		AWS.config.loadFromPath(awsPath);
 	} else {
-			console.error("Aborting: *** Configuration not found at "+awsPath);
-			process.exitCode = 20
-			process.exit();
+		console.error("Aborting: *** AWS config not found at "+awsPath);
+		process.exitCode = 20
+		process.exit();
 	}
 } ();
 

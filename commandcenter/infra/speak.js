@@ -3,11 +3,11 @@
 var say = require('say');
 var async = require('async');
 var _ = require('underscore');
-var polly = require('./aws-polly.js');
 var speakingQueue;
 
 var _speak = function(message, cb) {
     console.log('speaking:'+message);
+    var polly = require('./aws-polly.js');
     polly.speak(message, function(err) {
       if (!cb) { return }
       if (!err) {

@@ -2,11 +2,12 @@
 
 var IS_TEST = false;
 var _ = require('underscore');
+var fs = require('fs');
+const path = require('path');
 var Botkit = require('botkit');
 var controller = Botkit.slackbot();
 var winston = require('winston');
 var cc = require('./commandcenter/commandcenter.js');
-var private = require('./private_pibot_config.json');
 
 var _processCommand = function(message, cb) {
     cc.process(message, cb);
@@ -23,7 +24,9 @@ var _test = function() {
 
 var start = function(isTest) {
     prepareCommons();
-    winston.info('*** PIBOT STARTED ***');
+    var config = require(path.join(process.env.CONFIG_PATH, 'config.json'));
+    winston.info("*** PIBOT STARTED ***");
+    winston.info("Name "+config.name)
 
     if (isTest) {
         _test();
@@ -31,7 +34,7 @@ var start = function(isTest) {
     }
 
     var bot = controller.spawn({
-        token: private.slackbot_token
+        token: config.slackbot.token
     })
 
     bot.startRTM(function(err, bot, payload) {
@@ -75,6 +78,15 @@ var prepareCommons = function() {
     prettyPrint: true
   });
   winston.info('Winston Configured');
+
+  // Load configuration
+  var configPath = process.env.CONFIG_PATH;
+  if (!fs.existsSync(configPath)) {
+      winston.info("*** Aborting: Configuration directory not found at "+configPath);
+      process.exitCode = 1;
+      process.exit();
+  }
+  winston.info("Reading config from "+configPath)
 }
 
 start(IS_TEST);

@@ -6,6 +6,7 @@ for id.
 
 var _ = require('underscore');
 var schedule = require('node-schedule');
+const path = require('path');
 var fs = require('fs');
 var winston = require('winston');
 var events = require('./index').events;
@@ -13,7 +14,7 @@ var allJobs = {};
 
 var startAll = function(cb) {
   var appRoot = require('app-root-path');
-  var scheduleJSONPath = appRoot + '/commandcenter/infra/config/schedule.json';
+  var scheduleJSONPath = path.join(process.env.CONFIG_PATH, "schedule.json");
   require('fs').readFile(scheduleJSONPath, 'utf8', function (err, data) {
     if (err) {
       console.log(err);
