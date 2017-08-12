@@ -1,12 +1,11 @@
 A raspberrypi bot
 
-** configuration files **
+## Configuration files 
 Configuration files should be placed in ```/etc/pibot```
 
-** config.json **
+### config.json 
 Default launch configuration. This is required.
 ```
-
 {
     "name": "bot-name",
     "version": 1,
@@ -18,10 +17,9 @@ Default launch configuration. This is required.
     }
 }
 ```
-** Optional: **
 
-** schedule.json **
-Used to read scheduled events.
+### schedule.json
+Optional. Used to read scheduled events. 
 ```
 [
   {
@@ -40,5 +38,11 @@ Used to read scheduled events.
 ]
 ```
 
-** aws.json **
-To read AWS credentials. Formatted as http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-json-file.html
+### aws.json
+Optional. To read AWS credentials. Formatted as http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-json-file.html
+
+## Run
+```CONFIG_PATH=/etc/pibot node pibot.js```
+Or Using pm2
+```CONFIG_PATH=/etc/pibot pm2 start pibot```
+
