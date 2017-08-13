@@ -24,11 +24,11 @@ module.exports = {
    */
   deploy : {
     production : {
-      user : 'node',
-      host : '212.83.163.1',
-      ref  : 'origin/master',
-      repo : 'git@github.com:repo.git',
-      path : '/var/www/production',
+      user : 'sriks',
+      host : 'https://github.com',
+      ref  : 'origin/polly',
+      repo : 'git@github.com:sriks/pibot.git',
+      path : '/Users/totaramudu/git/pibot/t',
       'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
     },
     dev : {
