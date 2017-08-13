@@ -25,10 +25,10 @@ module.exports = {
   deploy : {
     production : {
       user : 'sriks',
-      host : 'https://github.com',
+      host : '127.0.0.1',
       ref  : 'origin/polly',
       repo : 'git@github.com:sriks/pibot.git',
-      path : '/Users/totaramudu/git/pibot/t',
+      path : '/Users/totaramudu/git/pibot/',
       'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
     },
     dev : {
