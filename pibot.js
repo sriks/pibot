@@ -80,9 +80,15 @@ var prepareCommons = function() {
   winston.info('Winston Configured');
 
   // Load configuration
-  var configPath = process.env.CONFIG_PATH;
+  var configPath = process.env.CONFIG_PATH
+  if (configPath === undefined) {
+    configPath = '/etc/pibot'
+    winston.info("*** Configuration directory not found at process.env.CONFIG_PATH");
+    winston.info("*** Using " + configPath);
+  }
   if (!fs.existsSync(configPath)) {
       winston.info("*** Aborting: Configuration directory not found at "+configPath);
+      winston.info("You should launch as CONFIG_PATH=/etc/pibot pm2 start pibot");
       process.exitCode = 1;
       process.exit();
   }
